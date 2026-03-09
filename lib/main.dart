@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import 'models/dhikr.dart';
 import 'providers/theme_provider.dart';
 import 'screens/home_screen.dart';
+import 'screens/allah_names_screen.dart';
+import 'screens/statistics_screen.dart';
+import 'screens/settings_screen.dart';
 import 'services/dhikr_service.dart';
 
 void main() async {
@@ -25,6 +28,11 @@ class TasbihApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: themeProvider.themeData,
             home: const HomeScreen(),
+            routes: {
+              '/allah_names': (context) => const AllahNamesScreen(),
+              '/statistics': (context) => const StatisticsScreen(),
+              '/settings': (context) => const SettingsScreen(),
+            },
           );
         },
       ),

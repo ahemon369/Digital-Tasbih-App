@@ -152,6 +152,15 @@ class ThemeProvider extends ChangeNotifier {
     }
   }
 
+  Color get scaffoldBackgroundColor {
+    switch (_currentTheme) {
+      case AppTheme.nightSky:
+        return const Color(0xFF0F1B2D);
+      case AppTheme.goldenRamadan:
+        return const Color(0xFF1A1A00);
+    }
+  }
+
   Color get accentColor {
     switch (_currentTheme) {
       case AppTheme.nightSky:
