@@ -111,7 +111,7 @@ class _AutoTasbihControlsState extends State<AutoTasbihControls>
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12), // Reduced from 16
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
@@ -145,8 +145,7 @@ class _AutoTasbihControlsState extends State<AutoTasbihControls>
           ),
 
           if (widget.isAutoMode) ...[
-            const SizedBox(height: 16),
-
+            const SizedBox(height: 12), // Reduced from 16
             // Speed Controls
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -157,8 +156,7 @@ class _AutoTasbihControlsState extends State<AutoTasbihControls>
               ],
             ),
 
-            const SizedBox(height: 16),
-
+            const SizedBox(height: 12), // Reduced from 16
             // Pause/Resume Button
             ElevatedButton.icon(
               onPressed: _togglePause,
@@ -193,7 +191,10 @@ class _AutoTasbihControlsState extends State<AutoTasbihControls>
       onTap: () => _setSpeed(speed),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 6,
+        ), // Further reduced
         decoration: BoxDecoration(
           color: isSelected ? themeProvider.primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(8),

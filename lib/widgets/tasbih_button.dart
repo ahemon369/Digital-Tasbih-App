@@ -7,12 +7,12 @@ import '../providers/theme_provider.dart';
 
 class TasbihButton extends StatefulWidget {
   final VoidCallback onPressed;
-  final bool isAutoMode;
+  final bool isCompleted;
 
   const TasbihButton({
     super.key,
     required this.onPressed,
-    this.isAutoMode = false,
+    this.isCompleted = false,
   });
 
   @override
@@ -83,15 +83,15 @@ class _TasbihButtonState extends State<TasbihButton>
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return GestureDetector(
-          onTap: widget.isAutoMode ? null : _onTap,
+          onTap: widget.isCompleted ? null : _onTap,
           child: AnimatedBuilder(
             animation: Listenable.merge([_scaleAnimation, _rippleAnimation]),
             builder: (context, child) {
               return Transform.scale(
                 scale: _scaleAnimation.value,
                 child: Container(
-                  width: 200,
-                  height: 200,
+                  width: 140, // Further reduced from 160
+                  height: 140, // Further reduced from 160
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: RadialGradient(
@@ -120,8 +120,8 @@ class _TasbihButtonState extends State<TasbihButton>
                       // Ripple effect
                       if (_rippleAnimation.value > 0)
                         Container(
-                          width: 200 * (1 + _rippleAnimation.value * 0.5),
-                          height: 200 * (1 + _rippleAnimation.value * 0.5),
+                          width: 140 * (1 + _rippleAnimation.value * 0.5),
+                          height: 140 * (1 + _rippleAnimation.value * 0.5),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
@@ -138,18 +138,18 @@ class _TasbihButtonState extends State<TasbihButton>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            widget.isAutoMode
-                                ? Icons.autorenew
+                            widget.isCompleted
+                                ? Icons.check_circle
                                 : Icons.touch_app,
-                            size: 40,
+                            size: 32, // Reduced from 40
                             color: Colors.white,
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 6), // Reduced from 8
                           Text(
-                            widget.isAutoMode ? 'Auto Mode' : 'Tap',
+                            widget.isCompleted ? 'Completed' : 'Tap',
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 14, // Reduced from 18
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -184,7 +184,7 @@ class BeadPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width / 2;
+    final radius = size.width / 2; // Now 80 instead of 100
     final paint = Paint()
       ..color = primaryColor.withOpacity(0.2)
       ..style = PaintingStyle.stroke

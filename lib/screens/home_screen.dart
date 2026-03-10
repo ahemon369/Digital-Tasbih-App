@@ -153,18 +153,29 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             children: [
               _buildHeader(themeProvider),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(12.0), // Reduced padding
                   child: Column(
+                    mainAxisSize:
+                        MainAxisSize.min, // Important for scrollable content
                     children: [
-                      DhikrSelector(
-                        selectedDhikr: _selectedDhikr,
-                        onDhikrSelected: _selectDhikr,
+                      // Dhikr Selector - more compact
+                      SizedBox(
+                        height: 90, // Further reduced
+                        child: DhikrSelector(
+                          selectedDhikr: _selectedDhikr,
+                          onDhikrSelected: _selectDhikr,
+                        ),
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 20), // Reduced spacing
+
                       if (_selectedDhikr != null) ...[
+                        // Progress Indicator - more compact
                         _buildProgressIndicator(),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 20),
+
+                        // Main Tasbih Button - smaller
                         AnimatedBuilder(
                           animation: Listenable.merge([
                             _pulseAnimation,
@@ -175,22 +186,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               scale: _pulseAnimation.value,
                               child: Transform.rotate(
                                 angle: _rotationAnimation.value,
-                                child: TasbihButton(
-                                  onPressed: _incrementCount,
-                                  isAutoMode: _isAutoMode,
-                                ),
+                                child: TasbihButton(onPressed: _incrementCount),
                               ),
                             );
                           },
                         ),
-                        const SizedBox(height: 40),
-                        _buildCountDisplay(),
                         const SizedBox(height: 20),
+
+                        // Count Display - more compact
+                        _buildCountDisplay(),
+                        const SizedBox(height: 16),
+
+                        // Auto Controls - more compact
                         AutoTasbihControls(
                           isAutoMode: _isAutoMode,
                           onToggleAuto: _toggleAutoMode,
                           onIncrement: _incrementCount,
                         ),
+                        const SizedBox(height: 30), // Bottom padding
                       ],
                     ],
                   ),
@@ -257,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Widget _buildCountDisplay() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16), // Reduced from 20
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
@@ -271,7 +284,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         children: [
           Text(
             '$_currentCount',
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+              // Changed from displayLarge
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

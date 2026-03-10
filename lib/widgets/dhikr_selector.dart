@@ -24,22 +24,24 @@ class _DhikrSelectorState extends State<DhikrSelector> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    
+
     return Container(
-      height: 120,
+      height: 90, // Further reduced
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _dhikrs.length,
         itemBuilder: (context, index) {
           final dhikr = _dhikrs[index];
           final isSelected = widget.selectedDhikr?.id == dhikr.id;
-          
+
           return GestureDetector(
             onTap: () => widget.onDhikrSelected(dhikr),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(
+                horizontal: 6,
+              ), // Reduced from 8
+              padding: const EdgeInsets.all(10), // Reduced from 12
               decoration: BoxDecoration(
                 gradient: isSelected
                     ? LinearGradient(
@@ -71,7 +73,7 @@ class _DhikrSelectorState extends State<DhikrSelector> {
                       ]
                     : null,
               ),
-              width: 140,
+              width: 110, // Further reduced from 120
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,31 +81,31 @@ class _DhikrSelectorState extends State<DhikrSelector> {
                   Text(
                     dhikr.arabic,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 14, // Further reduced from 16
                       fontWeight: FontWeight.bold,
                       color: isSelected ? Colors.white : Colors.white70,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2), // Further reduced from 3
                   Text(
                     dhikr.transliteration,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 9, // Further reduced from 10
                       color: isSelected ? Colors.white70 : Colors.white54,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2), // Further reduced from 3
                   Text(
                     dhikr.meaning,
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 8, // Further reduced from 9
                       color: isSelected ? Colors.white60 : Colors.white38,
                     ),
-                    maxLines: 2,
+                    maxLines: 1, // Reduced from 2
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
@@ -113,7 +115,7 @@ class _DhikrSelectorState extends State<DhikrSelector> {
                       Text(
                         'Target: ${dhikr.target}',
                         style: TextStyle(
-                          fontSize: 10,
+                          fontSize: 8, // Further reduced from 9
                           color: isSelected ? Colors.white : Colors.white54,
                           fontWeight: FontWeight.bold,
                         ),
@@ -121,7 +123,7 @@ class _DhikrSelectorState extends State<DhikrSelector> {
                       if (isSelected)
                         Icon(
                           Icons.check_circle,
-                          size: 16,
+                          size: 12, // Further reduced from 14
                           color: Colors.white,
                         ),
                     ],
